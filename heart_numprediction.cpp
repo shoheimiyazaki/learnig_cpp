@@ -7,7 +7,7 @@
 using namespace std;
 vector<string> list;
 std::string str;
-std::ifstream ifs("first.text");
+ifstream ifs("first.text");
 std::vector<std::string> v;
 
 #define LIMITUNUM 10000
@@ -33,6 +33,7 @@ public:
     int lenofarray;
 };
 
+//デバック用
 void PredictNum::cheack_debag(){
     float a,b;
     cout << "("<<from_num_x << ","<<from_num_y <<")"<<endl;
@@ -78,6 +79,8 @@ std::vector<std::string> split(const std::string& input, char delimiter)
 
 ///////////////////////////////////////////////
 
+
+ofstream fout( "results.text", ios::app );
 int main(void){
     float x1,y1,x2,y2;
     bool isx=true;
@@ -97,14 +100,12 @@ int main(void){
                 y2=(float)stoi(s);
             }
         }
-        cout <<endl;
-        cout <<"(" <<x1 <<","<<y1<<")"<<endl;
-        cout <<"(" <<x2 <<","<<y2<<")"<<endl;
-        cout <<endl;
-        PredictNum Obj(x1,y1,x2,y2,0.01);
+
+        PredictNum Obj(x1,y1,x2,y2,0.001);
         Obj.make_numbers();
         for(int i=0; i<Obj.lenofarray ; i++){
             cout << Obj.return_array[0][i] << "==>" << Obj.return_array[1][i]<<endl;
+            fout << Obj.return_array[0][i] << "==>" << Obj.return_array[1][i]<<endl;
         }
     }
     return 0;
